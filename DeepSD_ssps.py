@@ -95,9 +95,78 @@ if __name__ == '__main__':
         ffhist=[ ff.replace("ssp126","historical") for ff in  ffhist]
 
 
+        
+
+    if ssp == "ssp245":
+        hssp=["ScenarioMIP.AS-RCEC.TaiESM1.ssp245.day.gn",
+              "ScenarioMIP.AWI.AWI-CM-1-1-MR.ssp245.day.gn",
+              "ScenarioMIP.CAS.FGOALS-g3.ssp245.day.gn",
+              "ScenarioMIP.CCCma.CanESM5.ssp245.day.gn",
+              "ScenarioMIP.CMCC.CMCC-ESM2.ssp245.day.gn",
+              "ScenarioMIP.CSIRO-ARCCSS.ACCESS-CM2.ssp245.day.gn",
+              "ScenarioMIP.EC-Earth-Consortium.EC-Earth3-CC.ssp245.day.gr",
+              "ScenarioMIP.EC-Earth-Consortium.EC-Earth3.ssp245.day.gr",
+              "ScenarioMIP.EC-Earth-Consortium.EC-Earth3-Veg-LR.ssp245.day.gr",
+              "ScenarioMIP.INM.INM-CM4-8.ssp245.day.gr1",
+              "ScenarioMIP.INM.INM-CM5-0.ssp245.day.gr1",
+              "ScenarioMIP.KIOST.KIOST-ESM.ssp245.day.gr1",
+              "ScenarioMIP.MIROC.MIROC6.ssp245.day.gn",
+              "ScenarioMIP.MPI-M.MPI-ESM1-2-LR.ssp245.day.gn",
+              "ScenarioMIP.MRI.MRI-ESM2-0.ssp245.day.gn",
+              "ScenarioMIP.NCC.NorESM2-LM.ssp245.day.gn",
+              "ScenarioMIP.NCC.NorESM2-MM.ssp245.day.gn",
+              "ScenarioMIP.NOAA-GFDL.GFDL-CM4.ssp245.day.gr1",
+              "ScenarioMIP.NOAA-GFDL.GFDL-CM4.ssp245.day.gr2",
+              "ScenarioMIP.NOAA-GFDL.GFDL-ESM4.ssp245.day.gr1",
+              "ScenarioMIP.NUIST.NESM3.ssp245.day.gn"]
+        
+        ffhist=[ff.replace("ScenarioMIP","CMIP") for ff in  hhssp ]
+        ffhist=[ff.replace("ssp245","historical") for ff in  ffhist]
+      
 
 
-    
+    if ssp == "ssp370":
+        hhssp=["ScenarioMIP.AWI.AWI-CM-1-1-MR.ssp370.day.gn",
+               "ScenarioMIP.CAS.FGOALS-g3.ssp370.day.gn",
+               "ScenarioMIP.CCCma.CanESM5.ssp370.day.gn",
+               "ScenarioMIP.CMCC.CMCC-ESM2.ssp370.day.gn",
+               "ScenarioMIP.EC-Earth-Consortium.EC-Earth3-AerChem.ssp370.day.gr",
+               "ScenarioMIP.EC-Earth-Consortium.EC-Earth3.ssp370.day.gr_2",
+               "ScenarioMIP.EC-Earth-Consortium.EC-Earth3-Veg-LR.ssp370.day.gr",
+               "ScenarioMIP.INM.INM-CM4-8.ssp370.day.gr1",
+               "ScenarioMIP.INM.INM-CM5-0.ssp370.day.gr1",
+               "ScenarioMIP.MIROC.MIROC6.ssp370.day.gn",
+               "ScenarioMIP.MPI-M.MPI-ESM1-2-LR.ssp370.day.gn",
+               "ScenarioMIP.MRI.MRI-ESM2-0.ssp370.day.gn",
+               "ScenarioMIP.NCC.NorESM2-LM.ssp370.day.gn",
+               "ScenarioMIP.NCC.NorESM2-MM.ssp370.day.gn",
+               "ScenarioMIP.NOAA-GFDL.GFDL-ESM4.ssp370.day.gr1"]
+        ffhist= [ ff.replace("ScenarioMIP","CMIP") for ff in  hhssp ]
+        ffhist=[ ff.replace("ssp370","historical") for ff in  ffhist]
+        
+
+    if ssp == "ssp585":
+        hhssp = ["ScenarioMIP.AWI.AWI-CM-1-1-MR.ssp585.day.gn",
+                 "ScenarioMIP.CAS.FGOALS-g3.ssp585.day.gn",
+                 "ScenarioMIP.CCCma.CanESM5.ssp585.day.gn",
+                 "ScenarioMIP.CSIRO.ACCESS-ESM1-5.ssp585.day.gn",
+                 "ScenarioMIP.CSIRO-ARCCSS.ACCESS-CM2.ssp585.day.gn",
+                 "ScenarioMIP.EC-Earth-Consortium.EC-Earth3-Veg-LR.ssp585.day.gr",
+                 "ScenarioMIP.INM.INM-CM4-8.ssp585.day.gr1",
+                 "ScenarioMIP.INM.INM-CM5-0.ssp585.day.gr1",
+                 "ScenarioMIP.KIOST.KIOST-ESM.ssp585.day.gr1",
+                 "ScenarioMIP.MIROC.MIROC6.ssp585.day.gn",
+                 "ScenarioMIP.MPI-M.MPI-ESM1-2-LR.ssp585.day.gn",
+                 "ScenarioMIP.MRI.MRI-ESM2-0.ssp585.day.gn",
+                 "ScenarioMIP.NCC.NorESM2-LM.ssp585.day.gn",
+                 "ScenarioMIP.NCC.NorESM2-MM.ssp585.day.gn",
+                 "ScenarioMIP.NOAA-GFDL.GFDL-CM4.ssp585.day.gr1",
+                 "ScenarioMIP.NOAA-GFDL.GFDL-CM4.ssp585.day.gr2",
+                 "ScenarioMIP.NOAA-GFDL.GFDL-ESM4.ssp585.day.gr1",
+                 "ScenarioMIP.NUIST.NESM3.ssp585.day.gn"]
+        ffhist= [ ff.replace("ScenarioMIP","CMIP") for ff in  hhssp ]
+        ffhist=[ ff.replace("ssp585","historical") for ff in  ffhist]
+        
     print(ffhist)
     print()
     print(hhssp)
