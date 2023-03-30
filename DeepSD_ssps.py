@@ -1,6 +1,6 @@
 # parameters
 train_slice = slice('1985', '2014')  # train time range
-holdout_slice = slice('2070', '2099')  # prediction time range
+holdout_slice = slice('2015', '2044')  # prediction time range
 #train_slice = slice('1995', '2014')
 #holdout_slice = slice('1980', '1999')
 
@@ -50,7 +50,8 @@ if __name__ == '__main__':
     import pandas as pd
 
 
-    ssp="ssp585"
+    ssp="ssp126"
+    
     # collect the data from api
 
     url = "https://storage.googleapis.com/cmip6/pangeo-cmip6.json"
@@ -59,7 +60,8 @@ if __name__ == '__main__':
         activity_id =["CMIP","ScenarioMIP"], # search for historical and hist-nat (detection and attribution)
         variable_id=var,              # search for precipitation
         table_id="day",               # monthly values
-        experiment_id =[ssp,"historical"],
+#        experiment_id =[ssp,"historical"],
+        experiment_id =ssp,  
         #experiment_id ="historical",
         member_id ="r1i1p1f1"
     )
@@ -70,28 +72,53 @@ if __name__ == '__main__':
     #CMIP.MPI-M.MPI-ESM1-2-HR.historical.day.gn
     ffhist = ["CMIP."+cat.df.iloc[x].institution_id+"."+cat.df.iloc[x].source_id+".historical." + cat.df.iloc[x].table_id+"."+cat.df.iloc[x].grid_label  for x in range(cat.df.shape[0])]
     hhssp  = ["ScenarioMIP."+cat.df.iloc[x].institution_id+"."+cat.df.iloc[x].source_id+"."+ssp+"."+cat.df.iloc[x].table_id+"."+cat.df.iloc[x].grid_label  for x in range(cat.df.shape[0])]
+
+
+    if ssp == "ssp126":
+        hhssp=["ScenarioMIP.AWI.AWI-CM-1-1-MR.ssp126.day.gn",
+               "ScenarioMIP.CAS.FGOALS-g3.ssp126.day.gn",
+               "ScenarioMIP.CCCma.CanESM5.ssp126.day.gn",
+               "ScenarioMIP.CMCC.CMCC-ESM2.ssp126.day.gn",
+               "ScenarioMIP.EC-Earth-Consortium.EC-Earth3.ssp126.day.gr",
+               "ScenarioMIP.EC-Earth-Consortium.EC-Earth3-Veg-LR.ssp126.day.gr",
+               "ScenarioMIP.INM.INM-CM4-8.ssp126.day.gr1",
+               "ScenarioMIP.INM.INM-CM5-0.ssp126.day.gr1",
+               "ScenarioMIP.KIOST.KIOST-ESM.ssp126.day.gr1",
+               "ScenarioMIP.MIROC.MIROC6.ssp126.day.gn",
+               "ScenarioMIP.MPI-M.MPI-ESM1-2-LR.ssp126.day.gn",
+               "ScenarioMIP.MRI.MRI-ESM2-0.ssp126.day.gn",
+               "ScenarioMIP.NCC.NorESM2-MM.ssp126.day.gn",
+               "ScenarioMIP.NOAA-GFDL.GFDL-ESM4.ssp126.day.gr1",
+               "ScenarioMIP.NUIST.NESM3.ssp126.day.gn"]
+        
+        ffhist= [ ff.replace("ScenarioMIP","CMIP") for ff in  hhssp ]
+        ffhist=[ ff.replace("ssp126","historical") for ff in  ffhist]
+
+
+
+
+    
     print(ffhist)
     print()
     print(hhssp)
-
-#    ff = ["CMIP.NOAA-GFDL.GFDL-CM4.historical.day.gr2","CMIP.NOAA-GFDL.GFDL-CM4.historical.day.gr1",
-#          "CMIP.NASA-GISS.GISS-E2-1-G.historical.day.gn","CMIP.AWI.AWI-CM-1-1-MR.historical.day.gn",
-#          "CMIP.BCC.BCC-ESM1.historical.day.gn","CMIP.SNU.SAM0-UNICON.historical.day.gn",
-#          "CMIP.CCCma.CanESM5.historical.day.gn","CMIP.INM.INM-CM4-8.historical.day.gr1",
-#          "CMIP.MRI.MRI-ESM2-0.historical.day.gn","CMIP.INM.INM-CM5-0.historical.day.gr1",
-#          "CMIP.HAMMOZ-Consortium.MPI-ESM-1-2-HAM.historical.day.gn","CMIP.MPI-M.MPI-ESM1-2-LR.historical.day.gn",
-#          "CMIP.MPI-M.MPI-ESM1-2-HR.historical.day.gn","CMIP.NOAA-GFDL.GFDL-ESM4.historical.day.gr1",
-#          "CMIP.NUIST.NESM3.historical.day.gn","CMIP.NCC.NorESM2-LM.historical.day.gn",
-#          "CMIP.CAS.FGOALS-g3.historical.day.gn","CMIP.MIROC.MIROC6.historical.day.gn",
-#          "CMIP.CAS.FGOALS-f3-L.historical.day.gr","CMIP.CSIRO-ARCCSS.ACCESS-CM2.historical.day.gn",
-#          "CMIP.NCC.NorESM2-MM.historical.day.gn","CMIP.CSIRO.ACCESS-ESM1-5.historical.day.gn",
-#          "CMIP.KIOST.KIOST-ESM.historical.day.gr1","CMIP.AWI.AWI-ESM-1-1-LR.historical.day.gn",
-#          "CMIP.EC-Earth-Consortium.EC-Earth3-Veg-LR.historical.day.gr","CMIP.EC-Earth-Consortium.EC-Earth3.historical.day.gr"]
-    kk = 23 #4,5,6,8,9,10,18,21,22
+    
+    # again load cat for both hist and ssp:
+    del cat
+    
+    cat = col.search(
+        activity_id =["CMIP","ScenarioMIP"], # search for historical and hist-nat (detection and attribution)
+        variable_id=var,              # search for precipitation
+        table_id="day",               # monthly values
+        experiment_id =[ssp,"historical"],
+        member_id ="r1i1p1f1"
+    )
+    
+    
+    kk= 0
     for mod_hist, mod_ssp in zip(ffhist[kk:],hhssp[kk:]):
         print('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk                         ',kk)
         
-        #if kk == 2:
+        #if kk in [1]:
         #    kk+=1
         #    continue
         
@@ -151,6 +178,7 @@ if __name__ == '__main__':
         ########################################################
         holdout_subset = ds_model_ssp[var].sel(time=holdout_slice).interp_like(obs_subset.isel(time=0,
                                                                                            drop=True), method='linear')
+        print("--------------------START time conversion--------------------------------------")
         try:
             holdout_subset['time'] = pd.to_datetime(holdout_subset.indexes['time'])
         except TypeError:
@@ -160,8 +188,12 @@ if __name__ == '__main__':
 
         print("finished test_subset--------------------------")
         print()
+
+
+
         
-        print('start tarining '+mod_ssp)
+        
+        print('start tarining ---------------------------------------->>>>>>>>>>>>>>>>>>>>><'+mod_ssp)
         print()
         
         ##########################################################
@@ -192,5 +224,5 @@ if __name__ == '__main__':
         ##########################################################
         predicted.to_netcdf('predicted_'+mod_ssp+'_'+str(int(holdout_slice.start))+'_'+str(int(holdout_slice.stop))+'.nc')
         Client.restart(client)
-#        client = Client()
+###        client = Client()
         kk +=1 
